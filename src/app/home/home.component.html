@@ -1,0 +1,7 @@
+<h1>Alle Kunden</h1>
+
+<ul *ngIf="kunden">
+  <li *ngFor="let kunde of kunden.data"> 
+    <p>{{ kunde.first_name }} {{ kunde.last_name }}</p>
+  </li>
+</ul>
