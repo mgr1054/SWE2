@@ -1,0 +1,9 @@
+<mat-accordion multi="true" *ngIf="kunden.length > 0">
+  <mat-expansion-panel *ngFor="let kunde of kunden">
+    <mat-expansion-panel-header>
+      {{ kunde.title }}
+    </mat-expansion-panel-header>
+    <p>{{ kunde.content }}</p>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="info-text" *ngIf="kunden.length <= 0">No posts found</p>
