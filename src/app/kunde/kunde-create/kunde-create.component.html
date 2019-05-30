@@ -1,11 +1,24 @@
 <mat-card>
-  <mat-form-field>
-    <input matInput type="text" [(ngModel)]="enteredTitle" />
-  </mat-form-field>
-  <mat-form-field>
-    <textarea matInput rows="7" [(ngModel)]="enteredContent"></textarea>
-  </mat-form-field>
-  <button mat-raised-button color="accent" (click)="onAddKunde()">
-    Save
-  </button>
+  <form (submit)="onAddKunde(kundeForm)" #kundeForm="ngForm">
+    <mat-form-field>
+      <input matInput type="text" name="title" ngModel required minlength="3" placeholder="Title" #title="ngModel" />
+      <mat-error *ngIf="title.invalid">Please enter a valid Title</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+        matInput
+        rows="3"
+        name="content"
+        ngModel
+        required
+        minlength="3"
+        placeholder="Content"
+        #content="ngModel"
+      ></textarea>
+      <mat-error *ngIf="content.invalid">Please enter a valid Content</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit">
+      Save
+    </button>
+  </form>
 </mat-card>

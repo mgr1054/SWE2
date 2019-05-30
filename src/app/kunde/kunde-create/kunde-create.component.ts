@@ -1,5 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { KundenService } from '../kunden.service';
+import { from } from 'rxjs';
+
 @Component({
   selector: 'app-kunde-create',
   templateUrl: './kunde-create.component.html',
@@ -8,13 +11,14 @@ import { FormsModule } from '@angular/forms';
 export class KundeCreateComponent {
   enteredContent = '';
   enteredTitle = '';
-  @Output() kundeCreated = new EventEmitter();
 
-  onAddKunde() {
-    const kunde = {
-      title: this.enteredTitle,
-      content: this.enteredContent
-    };
-    this.kundeCreated.emit(kunde);
+  constructor(public kundenService: KundenService) {}
+
+  onAddKunde(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+    this.kundenService.addKunde(form.value.title, form.value.content);
+    form.resetForm();
   }
 }

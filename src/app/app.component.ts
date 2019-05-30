@@ -5,10 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  kundenStorage = [];
-
-  onKundeAdded(kunde) {
-    this.kundenStorage.push(kunde);
-  }
-}
+export class AppComponent {}
