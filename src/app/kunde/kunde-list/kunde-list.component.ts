@@ -16,7 +16,7 @@ export class KundeListComponent implements OnInit, OnDestroy {
   constructor(public kundenService: KundenService) {}
 
   ngOnInit() {
-    this.kunden = this.kundenService.getKunden();
+    this.kundenService.getKunden();
     this.kundenSubsc = this.kundenService.getKundenUpdateListener().subscribe((kunden: Kunde[]) => {
       this.kunden = kunden;
     });

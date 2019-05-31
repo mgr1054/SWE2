@@ -1,9 +1,9 @@
 <mat-accordion multi="true" *ngIf="kunden.length > 0">
   <mat-expansion-panel *ngFor="let kunde of kunden">
     <mat-expansion-panel-header>
-      {{ kunde.title }}
+      {{ kunde.id }}
     </mat-expansion-panel-header>
-    <p>{{ kunde.content }}</p>
+    <p>{{ kunde.nachname }}</p>
     <mat-action-row>
       <button mat-button color="accent">Edit</button>
       <button mat-button color="warn">Delete</button>

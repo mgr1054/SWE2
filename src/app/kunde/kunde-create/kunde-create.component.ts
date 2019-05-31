@@ -18,7 +18,7 @@ export class KundeCreateComponent {
     if (form.invalid) {
       return;
     }
-    this.kundenService.addKunde(form.value.title, form.value.content);
+    // this.kundenService.addKunde(form.value.title, form.value.content);
     form.resetForm();
   }
 }

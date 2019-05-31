@@ -1,31 +1,38 @@
 import { Kunde } from './kunde.model';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class KundenService {
   private kunden: Kunde[] = [];
   private kundenUpdated = new Subject<Kunde[]>();
+  private headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: 'Basic ' + btoa('admin:p')
+  });
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   getKunden() {
-    return [...this.kunden];
+    this.http
+      .get<{ kunden: Kunde[] }>('https://localhost:8444/00000000-0000-0000-0000-000000000000', {
+        headers: this.headers
+      })
+      .subscribe(kundenData => {
+        this.kunden = kundenData.kunden;
+        this.kundenUpdated.next([...this.kunden]);
+      });
   }
 
   getKundenUpdateListener() {
     return this.kundenUpdated.asObservable();
   }
 
-  addKunde(title: string, content: string) {
-    const kunde: Kunde = { title: title, content: content };
+  /*
+  addKunde(id: string, nachname: string) {
+    const kunde: Kunde = { id: id, nachname: nachname };
     this.kunden.push(kunde);
     this.kundenUpdated.next([...this.kunden]);
-  }
-
-  findById(id: string) {
-    const uri = `https://localhost:8443/${id}`;
-    this.httpClient.get(uri).subscribe();
-  }
+  }*/
 }
