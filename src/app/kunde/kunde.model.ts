@@ -12,6 +12,15 @@ export interface Kunde {
   geschlecht: string;
   familienstand: string;
   interessen: [string];
-  adresse: object;
+  adresse: {
+    plz: string;
+    ort: string;
+  };
   username: string;
+  links: [
+    {
+      rel: string;
+      href: string;
+    }
+  ];
 }
