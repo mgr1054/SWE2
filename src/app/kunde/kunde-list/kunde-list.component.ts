@@ -22,6 +22,10 @@ export class KundeListComponent implements OnInit, OnDestroy {
     });
   }
 
+  onDelete(kundenID: string) {
+    this.kundenService.deleteKunde(kundenID);
+  }
+
   //prevent mem leaks
   ngOnDestroy() {
     this.kundenSubsc.unsubscribe();

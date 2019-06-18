@@ -1,13 +1,14 @@
-import { Kunde } from './kunde.model';
+import { PostKunde } from './kunde.model';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as KundenDaten from './kunde-create/neuerKunde.json';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class KundenService {
-  private kunden: Kunde[];
-  private kundenUpdated = new Subject<Kunde[]>();
+  private kunden: any[] = [];
+  private kundenUpdated = new Subject<any[]>();
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
     Authorization: 'Basic ' + btoa('admin:p')
@@ -18,16 +19,19 @@ export class KundenService {
 
   getKunden() {
     this.http
-      .get<Kunde[]>(`${this.url}/`, {
+      .get<any[]>(`${this.url}/`, {
         headers: this.headers
       })
-      .subscribe(kundenData => {
-        this.kunden = kundenData;
-        this.kunden.forEach(element => {
-          let pid = element.links[0].href;
-          pid = pid.slice(22);
-          element.id = pid;
-        });
+      .pipe(
+        map(kundenData => {
+          kundenData.map(kunde => {
+            kunde.id = kunde.links[0].href.slice(22);
+          });
+          return kundenData;
+        })
+      )
+      .subscribe(kundenTrans => {
+        this.kunden = kundenTrans;
         this.kundenUpdated.next([...this.kunden]);
       });
   }
@@ -36,14 +40,24 @@ export class KundenService {
     return this.kundenUpdated.asObservable();
   }
 
-  /*
-    addKunde(id: string, nachname: string) {
-      const kunde: any = KundenDaten;
-      this.http.post(`${this.url}/`, kunde)
-        .subscribe((responseData) => {
-          console.log(responseData);
-        });
-      this.kunden.push(kunde);
+  addKunde(kundenDaten: PostKunde) {
+    this.http
+      .post(`${this.url}`, kundenDaten, {
+        headers: this.headers,
+        observe: 'response',
+        responseType: 'text'
+      })
+      .subscribe(responseData => {
+        this.kunden.push(kundenDaten);
+        this.kundenUpdated.next([...this.kunden]);
+      });
+  }
+
+  deleteKunde(kundenID: string) {
+    this.http.delete(`${this.url}/` + kundenID).subscribe(() => {
+      const upKunden = this.kunden.filter(kunde => kunde.id !== kundenID);
+      this.kunden = upKunden;
       this.kundenUpdated.next([...this.kunden]);
-    }*/
+    });
+  }
 }

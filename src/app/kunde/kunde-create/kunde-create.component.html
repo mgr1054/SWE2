@@ -1,21 +1,70 @@
 <mat-card>
   <form (submit)="onAddKunde(kundeForm)" #kundeForm="ngForm">
     <mat-form-field>
-      <input matInput type="text" name="title" ngModel required minlength="3" placeholder="Title" #title="ngModel" />
-      <mat-error *ngIf="title.invalid">Please enter a valid Title</mat-error>
+      <input matInput type="text" name="nachname" ngModel required minlength="3" placeholder="Nachname"
+        #nachname="ngModel" />
+      <mat-error *ngIf="nachname.invalid">Please enter a valid surname</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <textarea
-        matInput
-        rows="3"
-        name="content"
-        ngModel
-        required
-        minlength="3"
-        placeholder="Content"
-        #content="ngModel"
-      ></textarea>
-      <mat-error *ngIf="content.invalid">Please enter a valid Content</mat-error>
+      <input matInput type="text" name="email" ngModel required minlength="3" placeholder="Email" #email="ngModel" />
+      <mat-error *ngIf="email.invalid">Please enter a valid email</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" name="kategorie" ngModel required placeholder="Kategorie" #kategorie="ngModel" />
+      <mat-error *ngIf="kategorie.invalid">Please enter a valid kategory </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput name="interessen" ngModel required placeholder="Interessen" #interessen="ngModel" ng-list />
+      <mat-error *ngIf="interessen.invalid">Please enter a valid Interessen</mat-error>
+    </mat-form-field>
+
+    <input type="checkbox" name="newsletter" ngModel required placeholder="newsletter" #newsletter="ngModel" />
+    <mat-error *ngIf="newsletter.invalid">Please enter a valid newsletter</mat-error>
+
+    <mat-form-field>
+      <input matInput type="date" name="geburtsdatum" ngModel required minlength="3" placeholder="Geburtsdatum"
+        #geburtsdatum="ngModel" />
+      <mat-error *ngIf="geburtsdatum.invalid">Please enter a valid birthdate</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" name="plz" ngModel required minlength="3" placeholder="PLZ" #plz="ngModel" />
+      <mat-error *ngIf="password.invalid">Please enter a valid PLZ</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" name="ort" ngModel required minlength="3" placeholder="Ort" #ort="ngModel" />
+      <mat-error *ngIf="ort.invalid">Please enter a valid Ort</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" name="homepage" ngModel required minlength="3" placeholder="Homepage"
+        #homepage="ngModel" />
+      <mat-error *ngIf="homepage.invalid">Please enter a valid homepage</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" name="geschlecht" ngModel required maxlength="1" placeholder="Geschlecht"
+        #geschlecht="ngModel" />
+      <mat-error *ngIf="geschlecht.invalid">Please enter a valid sex</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" name="familienstand" ngModel required placeholder="Familienstand"
+        #familienstand="ngModel" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" name="waehrung" ngModel required placeholder="Waehrung" #waehrung="ngModel" />
+      <mat-error *ngIf="waehrung.invalid">Please enter a valid waehrung</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" name="betrag" ngModel required minlength="3" placeholder="Betrag" #betrag="ngModel" />
+      <mat-error *ngIf="betrag.invalid">Please enter a valid betrag</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" name="username" ngModel required minlength="3" placeholder="Username"
+        #username="ngModel" />
+      <mat-error *ngIf="username.invalid">Please enter a valid username</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" name="password" ngModel required minlength="3" placeholder="Password"
+        #password="ngModel" />
+      <mat-error *ngIf="password.invalid">Please enter a valid password</mat-error>
     </mat-form-field>
     <button mat-raised-button color="accent" type="submit">
       Save

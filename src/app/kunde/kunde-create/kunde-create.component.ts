@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { KundenService } from '../kunden.service';
-import { from } from 'rxjs';
+import { toKunde } from '../../utils/tokunde';
+import * as neuerKunde from './neuerKunde.json';
 
 @Component({
   selector: 'app-kunde-create',
@@ -18,7 +19,8 @@ export class KundeCreateComponent {
     if (form.invalid) {
       return;
     }
-    // this.kundenService.addKunde(form.value.title, form.value.content);
+    let tempK = toKunde(form);
+    this.kundenService.addKunde(tempK);
     form.resetForm();
   }
 }

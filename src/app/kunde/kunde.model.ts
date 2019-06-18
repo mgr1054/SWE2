@@ -6,9 +6,9 @@ export interface Kunde {
   email: string;
   kategorie: number;
   newsletter: boolean;
-  geburtsdatum: Date;
+  geburtsdatum: string;
   umsatz: object;
-  homepage: Url;
+  homepage: string;
   geschlecht: string;
   familienstand: string;
   interessen: [string];
@@ -23,4 +23,28 @@ export interface Kunde {
       href: string;
     }
   ];
+}
+
+export interface PostKunde {
+  nachname: string;
+  email: string;
+  kategorie: number;
+  newsletter: boolean;
+  geburtsdatum: string;
+  umsatz: {
+    betrag: number;
+    waehrung: string;
+  };
+  homepage: string;
+  geschlecht: string;
+  familienstand: string;
+  interessen: any[];
+  adresse: {
+    plz: string;
+    ort: string;
+  };
+  user: {
+    username: string;
+    password: string;
+  };
 }
