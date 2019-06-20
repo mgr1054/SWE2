@@ -5,7 +5,7 @@
     </mat-expansion-panel-header>
     <p>{{ kunde.nachname }}</p>
     <mat-action-row>
-      <button mat-button color="accent">Edit</button>
+      <a mat-button color="accent" [routerLink]="['/edit', kunde.id]">Edit</a>
       <button mat-button color="warn" (click)="onDelete(kunde.id)">Delete</button>
     </mat-action-row>
   </mat-expansion-panel>

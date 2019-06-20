@@ -16,6 +16,7 @@
     "plz": "12345",
     "ort": "Testort"
   },
+  "username": "test",
   "user": {
     "username": "test",
     "password": "p"

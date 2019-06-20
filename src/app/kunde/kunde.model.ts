@@ -7,22 +7,29 @@ export interface Kunde {
   kategorie: number;
   newsletter: boolean;
   geburtsdatum: string;
-  umsatz: object;
+  umsatz: {
+    betrag: number;
+    waehrung: string;
+  };
   homepage: string;
   geschlecht: string;
   familienstand: string;
-  interessen: [string];
+  interessen: any[];
   adresse: {
     plz: string;
     ort: string;
   };
-  username: string;
   links: [
     {
       rel: string;
       href: string;
     }
   ];
+  username: string;
+  user: {
+    username: string;
+    password: string;
+  };
 }
 
 export interface PostKunde {

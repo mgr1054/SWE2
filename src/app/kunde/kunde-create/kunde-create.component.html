@@ -1,69 +1,81 @@
 <mat-card>
-  <form (submit)="onAddKunde(kundeForm)" #kundeForm="ngForm">
-    <mat-form-field>
-      <input matInput type="text" name="nachname" ngModel required minlength="3" placeholder="Nachname"
-        #nachname="ngModel" />
+  <form (submit)="onSaveKunde(kundeForm)" #kundeForm="ngForm">
+    <mat-form-field *ngIf="true">
+      <input matInput type="text" name="nachname" [ngModel]="kunde?.nachname" required minlength="3"
+        placeholder="Nachname" #nachname="ngModel" />
       <mat-error *ngIf="nachname.invalid">Please enter a valid surname</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="text" name="email" ngModel required minlength="3" placeholder="Email" #email="ngModel" />
+      <input matInput type="text" name="email" [ngModel]="kunde?.email" required minlength="3" placeholder="Email"
+        #email="ngModel" />
       <mat-error *ngIf="email.invalid">Please enter a valid email</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="text" name="kategorie" ngModel required placeholder="Kategorie" #kategorie="ngModel" />
+      <input matInput type="text" name="kategorie" [ngModel]="kunde?.kategorie" required placeholder="Kategorie"
+        #kategorie="ngModel" />
       <mat-error *ngIf="kategorie.invalid">Please enter a valid kategory </mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput name="interessen" ngModel required placeholder="Interessen" #interessen="ngModel" ng-list />
+      <input matInput name="interessen" [ngModel]="kunde?.interessen" required placeholder="Interessen"
+        #interessen="ngModel" ng-list />
       <mat-error *ngIf="interessen.invalid">Please enter a valid Interessen</mat-error>
     </mat-form-field>
-
-    <input type="checkbox" name="newsletter" ngModel required placeholder="newsletter" #newsletter="ngModel" />
-    <mat-error *ngIf="newsletter.invalid">Please enter a valid newsletter</mat-error>
-
     <mat-form-field>
-      <input matInput type="date" name="geburtsdatum" ngModel required minlength="3" placeholder="Geburtsdatum"
-        #geburtsdatum="ngModel" />
+      <mat-label>Newsletter</mat-label>
+      <select matNativeControl required name="newsletter" [ngModel]="kunde?.newsletter" #newsletter="ngModel">
+        <option value="false">false</option>
+        <option value="true">true</option>
+      </select>
+      <mat-error *ngIf=" newsletter.invalid">Please enter a valid newsletter</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="date" name="geburtsdatum" [ngModel]="kunde?.geburtsdatum" required minlength="3"
+        placeholder="Geburtsdatum" #geburtsdatum="ngModel" />
       <mat-error *ngIf="geburtsdatum.invalid">Please enter a valid birthdate</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="text" name="plz" ngModel required minlength="3" placeholder="PLZ" #plz="ngModel" />
-      <mat-error *ngIf="password.invalid">Please enter a valid PLZ</mat-error>
+      <input matInput type="text" name="plz" [ngModel]="kunde?.adresse.plz" required minlength="3" placeholder="PLZ"
+        #plz="ngModel" />
+      <mat-error *ngIf="plz.invalid">Please enter a valid PLZ</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="text" name="ort" ngModel required minlength="3" placeholder="Ort" #ort="ngModel" />
+      <input matInput type="text" name="ort" [ngModel]="kunde?.adresse.ort" required minlength="3" placeholder="Ort"
+        #ort="ngModel" />
       <mat-error *ngIf="ort.invalid">Please enter a valid Ort</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="text" name="homepage" ngModel required minlength="3" placeholder="Homepage"
-        #homepage="ngModel" />
+      <input matInput type="text" name="homepage" [ngModel]="kunde?.homepage" required minlength="3"
+        placeholder="Homepage" #homepage="ngModel" />
       <mat-error *ngIf="homepage.invalid">Please enter a valid homepage</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="text" name="geschlecht" ngModel required maxlength="1" placeholder="Geschlecht"
-        #geschlecht="ngModel" />
+      <input matInput type="text" name="geschlecht" [ngModel]="kunde?.geschlecht" required maxlength="1"
+        placeholder="Geschlecht" #geschlecht="ngModel" />
       <mat-error *ngIf="geschlecht.invalid">Please enter a valid sex</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="text" name="familienstand" ngModel required placeholder="Familienstand"
-        #familienstand="ngModel" />
+      <input matInput type="text" name="familienstand" [ngModel]="kunde?.familienstand" required
+        placeholder="Familienstand" #familienstand="ngModel" />
+      <mat-error *ngIf="familienstand.invalid">Please enter a valid familienstand</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="text" name="waehrung" ngModel required placeholder="Waehrung" #waehrung="ngModel" />
+      <input matInput type="text" name="waehrung" [ngModel]="kunde?.umsatz.waehrung" required placeholder="Waehrung"
+        #waehrung="ngModel" />
       <mat-error *ngIf="waehrung.invalid">Please enter a valid waehrung</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="text" name="betrag" ngModel required minlength="3" placeholder="Betrag" #betrag="ngModel" />
+      <input matInput type="text" name="betrag" [ngModel]="kunde?.umsatz.betrag" required placeholder="Betrag"
+        #betrag="ngModel" />
       <mat-error *ngIf="betrag.invalid">Please enter a valid betrag</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="text" name="username" ngModel required minlength="3" placeholder="Username"
-        #username="ngModel" />
+      <input matInput type="text" name="username" [ngModel]="kunde?.username" required minlength=" 3"
+        placeholder="Username" #username="ngModel" [disabled]="mode" />
       <mat-error *ngIf="username.invalid">Please enter a valid username</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="password" name="password" ngModel required minlength="3" placeholder="Password"
-        #password="ngModel" />
+      <input matInput type="password" name="password" [ngModel]="password" minlength=" 3" placeholder="Password"
+        #password="ngModel" [disabled]="mode" />
       <mat-error *ngIf="password.invalid">Please enter a valid password</mat-error>
     </mat-form-field>
     <button mat-raised-button color="accent" type="submit">
