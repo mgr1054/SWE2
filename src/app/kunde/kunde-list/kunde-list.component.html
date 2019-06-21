@@ -1,4 +1,5 @@
-<mat-accordion multi="true" *ngIf="kunden.length > 0">
+<mat-spinner *ngIf="laedt"></mat-spinner>
+<mat-accordion multi="true" *ngIf="kunden.length > 0 && !laedt">
   <mat-expansion-panel *ngFor="let kunde of kunden">
     <mat-expansion-panel-header>
       {{ kunde.id }}
@@ -10,4 +11,4 @@
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
-<p class="info-text" *ngIf="kunden.length <= 0">No posts found</p>
+<p class="info-text" *ngIf="kunden.length <= 0 && !laedt">No posts found</p>

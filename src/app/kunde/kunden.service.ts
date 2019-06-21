@@ -2,8 +2,10 @@ import { PostKunde, Kunde } from './kunde.model';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { toKunde, toKundenf } from '../utils/tokunde';
+import { map, catchError } from 'rxjs/operators';
+import { toKundenf, toKundeme } from '../utils/tokunde';
+import { compare } from '../utils/compareObj';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class KundenService {
@@ -13,14 +15,9 @@ export class KundenService {
     'Content-Type': 'application/json',
     Authorization: 'Basic ' + btoa('admin:p')
   });
-  private putheaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-    Authorization: 'Basic ' + btoa('admin:p'),
-    'If-Match': '1'
-  });
   private url = 'http://localhost:4200/rest';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getKunden() {
     this.http
@@ -42,9 +39,20 @@ export class KundenService {
   }
 
   getKunde(id: string) {
-    return this.http.get<Kunde>(`${this.url}/${id}`, {
-      headers: this.headers
-    });
+    return this.http
+      .get(`${this.url}/${id}`, {
+        headers: this.headers,
+        observe: 'response'
+      })
+      .pipe(
+        map(kunde => {
+          let kundeTrans: any = kunde.body;
+          kundeTrans.version = kunde.headers.get('etag').slice(1, 2);
+          toKundeme(kundeTrans);
+          return kundeTrans;
+        }),
+        catchError(() => this.router.navigate(['/']))
+      );
   }
 
   getKundenUpdateListener() {
@@ -58,28 +66,43 @@ export class KundenService {
         observe: 'response',
         responseType: 'text'
       })
+      .pipe(catchError(() => this.router.navigate(['/'])))
       .subscribe(responseData => {
         this.kunden.push(kundenDaten);
         this.kundenUpdated.next([...this.kunden]);
+        this.router.navigate(['/']);
       });
   }
 
   updatePost(daten: Kunde) {
-    console.log(daten);
     const tid = daten.id;
-    toKundenf(daten);
+    let vgl = this.kunden.find(k => k.id === tid);
+    vgl = toKundenf(vgl);
+    daten = toKundenf(daten);
     console.log(daten);
-    this.http
-      .put(`${this.url}/` + tid, daten, {
-        headers: this.putheaders
-      })
-      .subscribe(resp => {
-        const updatedKunden = [...this.kunden];
-        const oldKundenInd = updatedKunden.findIndex(k => k.id === tid);
-        updatedKunden[oldKundenInd] = daten;
-        this.kunden = updatedKunden;
-        this.kundenUpdated.next([...this.kunden]);
-      });
+    let putheaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Basic ' + btoa('admin:p'),
+      'If-Match': daten.version
+    });
+    if (!compare(daten, vgl)) {
+      toKundenf(daten);
+      this.http
+        .put(`${this.url}/` + tid, daten, {
+          headers: putheaders
+        })
+        .pipe(catchError(() => this.router.navigate(['/'])))
+        .subscribe(resp => {
+          const updatedKunden = [...this.kunden];
+          const oldKundenInd = updatedKunden.findIndex(k => k.id === tid);
+          updatedKunden[oldKundenInd] = daten;
+          this.kunden = updatedKunden;
+          this.kundenUpdated.next([...this.kunden]);
+          this.router.navigate(['/']);
+        });
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   deleteKunde(kundenID: string) {

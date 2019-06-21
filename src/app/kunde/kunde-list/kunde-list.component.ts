@@ -12,12 +12,15 @@ import { KundenService } from '../kunden.service';
 export class KundeListComponent implements OnInit, OnDestroy {
   kunden: Kunde[] = [];
   private kundenSubsc: Subscription;
+  laedt = false;
 
   constructor(public kundenService: KundenService) {}
 
   ngOnInit() {
     this.kundenService.getKunden();
+    this.laedt = true;
     this.kundenSubsc = this.kundenService.getKundenUpdateListener().subscribe((kunden: Kunde[]) => {
+      this.laedt = false;
       this.kunden = kunden;
     });
   }

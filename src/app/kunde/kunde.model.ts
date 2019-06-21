@@ -1,5 +1,3 @@
-import { Url } from 'url';
-
 export interface Kunde {
   id: string;
   nachname: string;
@@ -30,6 +28,7 @@ export interface Kunde {
     username: string;
     password: string;
   };
+  version?: string;
 }
 
 export interface PostKunde {

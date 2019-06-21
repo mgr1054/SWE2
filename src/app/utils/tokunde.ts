@@ -1,29 +1,30 @@
 export function toKundenf(form: any) {
   let kunde = {
-    id: null,
+    id: form.id,
     nachname: String(form.nachname),
     email: String(form.email),
     kategorie: Number(form.kategorie),
     newsletter: Boolean(form.newsletter),
     geburtsdatum: String(form.geburtsdatum),
     umsatz: {
-      betrag: Number(form.betrag),
-      waehrung: String(form.waehrung)
+      betrag: Number(form.umsatz.betrag),
+      waehrung: String(form.umsatz.waehrung)
     },
     homepage: String(form.homepage),
     geschlecht: String(form.geschlecht),
     familienstand: String(form.familienstand),
     interessen: [String(form.interessen)],
     adresse: {
-      plz: String(form.plz),
-      ort: String(form.ort)
+      plz: String(form.adresse.plz),
+      ort: String(form.adresse.ort)
     },
     username: String(form.username),
     user: {
       username: String(form.username),
       password: String(form.password)
     },
-    links: null
+    links: null,
+    version: form.version
   };
   return kunde;
 }
@@ -53,7 +54,39 @@ export function toKunde(form: any) {
       username: String(form.value.username),
       password: String(form.value.password)
     },
-    links: null
+    links: null,
+    version: form.value.version
+  };
+  return kunde;
+}
+
+export function toKundeme(form: any) {
+  let kunde = {
+    id: form.id,
+    nachname: String(form.nachname),
+    email: String(form.email),
+    kategorie: Number(form.kategorie),
+    newsletter: Boolean(form.newsletter),
+    geburtsdatum: String(form.geburtsdatum),
+    umsatz: {
+      betrag: Number(form.umsatz.betrag),
+      waehrung: String(form.umsatz.waehrung)
+    },
+    homepage: String(form.homepage),
+    geschlecht: String(form.geschlecht),
+    familienstand: String(form.familienstand),
+    interessen: [String(form.interessen)],
+    adresse: {
+      plz: String(form.adresse.plz),
+      ort: String(form.adresse.ort)
+    },
+    username: String(form.username),
+    user: {
+      username: String(form.username),
+      password: String(form.password)
+    },
+    links: null,
+    version: form.version
   };
   return kunde;
 }

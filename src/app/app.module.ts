@@ -15,7 +15,8 @@ import {
   MatButtonModule,
   MatToolbarModule,
   MatExpansionModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import { AppRoutingModule } from './approuting.module';
 
@@ -32,7 +33,8 @@ import { AppRoutingModule } from './approuting.module';
     MatToolbarModule,
     MatExpansionModule,
     HttpClientModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

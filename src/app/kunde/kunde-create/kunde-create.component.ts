@@ -17,6 +17,7 @@ export class KundeCreateComponent implements OnInit {
   public mode = false;
   private kID: string;
   public kunde: Kunde;
+  laedt = false;
 
   constructor(public kundenService: KundenService, public route: ActivatedRoute) {}
 
@@ -25,8 +26,9 @@ export class KundeCreateComponent implements OnInit {
       if (paramMap.has('id')) {
         this.mode = true;
         this.kID = paramMap.get('id');
+        this.laedt = true;
         this.kundenService.getKunde(this.kID).subscribe(kundeData => {
-          console.log(kundeData);
+          this.laedt = false;
           this.kunde = kundeData;
         });
       } else {
@@ -40,11 +42,14 @@ export class KundeCreateComponent implements OnInit {
     if (form.invalid) {
       return;
     }
+    this.laedt = true;
     let tempK = toKunde(form);
     if (!this.mode) {
       this.kundenService.addKunde(tempK);
     } else {
       tempK.id = this.kID;
+      tempK.username = this.kunde.username;
+      tempK.user = this.kunde.user;
       this.kundenService.updatePost(tempK);
     }
 

@@ -1,5 +1,6 @@
 <mat-card>
-  <form (submit)="onSaveKunde(kundeForm)" #kundeForm="ngForm">
+  <mat-spinner *ngIf="laedt"></mat-spinner>
+  <form (submit)="onSaveKunde(kundeForm)" #kundeForm="ngForm" *ngIf="!laedt">
     <mat-form-field *ngIf="true">
       <input matInput type="text" name="nachname" [ngModel]="kunde?.nachname" required minlength="3"
         placeholder="Nachname" #nachname="ngModel" />
@@ -74,9 +75,14 @@
       <mat-error *ngIf="username.invalid">Please enter a valid username</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="password" name="password" [ngModel]="password" minlength=" 3" placeholder="Password"
+      <input matInput type="password" name="password" [ngModel]="password" minlength=" 3" placeholder=""
         #password="ngModel" [disabled]="mode" />
       <mat-error *ngIf="password.invalid">Please enter a valid password</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" name="version" [ngModel]="kunde?.version" placeholder="Version" #version="ngModel"
+        [disabled]="!mode" />
+      <mat-error *ngIf="version.invalid">Please enter a valid version</mat-error>
     </mat-form-field>
     <button mat-raised-button color="accent" type="submit">
       Save
