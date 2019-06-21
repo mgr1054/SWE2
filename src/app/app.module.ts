@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -16,7 +16,9 @@ import {
   MatToolbarModule,
   MatExpansionModule,
   MatCheckboxModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatPaginatorModule,
+  MatTabsModule
 } from '@angular/material';
 import { AppRoutingModule } from './approuting.module';
 
@@ -25,7 +27,7 @@ import { AppRoutingModule } from './approuting.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,
@@ -34,7 +36,9 @@ import { AppRoutingModule } from './approuting.module';
     MatExpansionModule,
     HttpClientModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -63,8 +63,7 @@ export class KundenService {
     this.http
       .post(`${this.url}`, kundenDaten, {
         headers: this.headers,
-        observe: 'response',
-        responseType: 'text'
+        observe: 'response'
       })
       .pipe(catchError(() => this.router.navigate(['/'])))
       .subscribe(responseData => {
@@ -79,7 +78,6 @@ export class KundenService {
     let vgl = this.kunden.find(k => k.id === tid);
     vgl = toKundenf(vgl);
     daten = toKundenf(daten);
-    console.log(daten);
     let putheaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Basic ' + btoa('admin:p'),
@@ -106,10 +104,131 @@ export class KundenService {
   }
 
   deleteKunde(kundenID: string) {
-    this.http.delete(`${this.url}/` + kundenID).subscribe(() => {
-      const upKunden = this.kunden.filter(kunde => kunde.id !== kundenID);
-      this.kunden = upKunden;
-      this.kundenUpdated.next([...this.kunden]);
-    });
+    this.http
+      .delete(`${this.url}/` + kundenID, {
+        headers: this.headers
+      })
+      .subscribe(() => {
+        const upKunden = this.kunden.filter(kunde => kunde.id !== kundenID);
+        this.kunden = upKunden;
+        this.kundenUpdated.next([...this.kunden]);
+      });
+  }
+
+  findByID(id: String) {
+    let res;
+    this.http
+      .get<any>(`${this.url}/${id}`, {
+        headers: this.headers
+      })
+      .pipe(
+        map(kundenData => {
+          kundenData.id = kundenData.links[0].href.slice(22);
+          return kundenData;
+        })
+      )
+      .subscribe(kunde => {
+        res = kunde;
+        this.kunden = [];
+        this.kunden.push(res);
+        this.kundenUpdated.next([...this.kunden]);
+      });
+    return res;
+  }
+
+  findByEmail(email: String) {
+    let res;
+    let cut = email.length;
+    this.http
+      .get<any>(`${this.url}/?email=${email}`, {
+        headers: this.headers
+      })
+      .pipe(
+        map(kundenData => {
+          kundenData.map(kunde => {
+            kunde.id = kunde.links[0].href.slice(30 + cut);
+          });
+          return kundenData;
+        })
+      )
+      .subscribe(kunde => {
+        res = kunde;
+        this.kunden = [];
+        this.kunden = res;
+        this.kundenUpdated.next([...this.kunden]);
+      });
+    return res;
+  }
+
+  findByNachnOrt(nachn: String, ort: String) {
+    let res;
+    let cut = nachn.length + ort.length;
+    this.http
+      .get<any>(`${this.url}/?nachname=${nachn}&ort=${ort}`, {
+        headers: this.headers
+      })
+      .pipe(
+        map(kundenData => {
+          kundenData.map(kunde => {
+            kunde.id = kunde.links[0].href.slice(38 + cut);
+          });
+          return kundenData;
+        })
+      )
+      .subscribe(kunde => {
+        res = kunde;
+        this.kunden = [];
+        this.kunden = res;
+        this.kundenUpdated.next([...this.kunden]);
+      });
+    return res;
+  }
+
+  findByNachnOrtPlz(nachn: String, ort: String, plz: String) {
+    let res;
+    let cut = nachn.length + ort.length + plz.length;
+    this.http
+      .get<any>(`${this.url}/?nachname=${nachn}&ort=${ort}&plz=${plz}`, {
+        headers: this.headers
+      })
+      .pipe(
+        map(kundenData => {
+          kundenData.map(kunde => {
+            kunde.id = kunde.links[0].href.slice(44 + cut);
+          });
+          return kundenData;
+        })
+      )
+      .subscribe(kunde => {
+        res = kunde;
+        this.kunden = [];
+        this.kunden = res;
+        this.kundenUpdated.next([...this.kunden]);
+      });
+    return res;
+  }
+
+  findByNachname(nachname: String) {
+    let res;
+    let cut = nachname.length;
+    this.http
+      .get<any>(`${this.url}/?nachname=${nachname}`, {
+        headers: this.headers
+      })
+      .pipe(
+        map(kundenData => {
+          kundenData.map(kunde => {
+            kunde.id = kunde.links[0].href.slice(33 + cut);
+          });
+          return kundenData;
+        })
+      )
+      .subscribe(kunde => {
+        res = kunde;
+        this.kunden = [];
+        this.kunden = res;
+        this.kundenUpdated.next([...this.kunden]);
+      });
+    return res;
   }
 }
