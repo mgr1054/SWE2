@@ -89,7 +89,6 @@ export class KundenService {
         .put(`${this.url}/` + tid, daten, {
           headers: putheaders
         })
-        .pipe(catchError(() => this.router.navigate(['/'])))
         .subscribe(resp => {
           const updatedKunden = [...this.kunden];
           const oldKundenInd = updatedKunden.findIndex(k => k.id === tid);

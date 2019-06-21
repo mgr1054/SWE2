@@ -13,10 +13,14 @@
       <input matInput type="text" formControlName="kategorie" placeholder="Kategorie" />
       <mat-error *ngIf="form.get('kategorie').invalid">Please enter a valid kategory </mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <input matInput type="text" formControlName="interessen" placeholder="Interessen" ng-list />
-      <mat-error *ngIf="form.get('interessen').invalid">Please enter a valid Interessen</mat-error>
-    </mat-form-field>
+    <mat-list>+
+      <mat-label>Interessen</mat-label>
+      <mat-list-item>
+        <input type="checkbox" formControlName="interessenL" name="L"><Label>L</Label>
+        <input type="checkbox" formControlName="interessenR" name="R"><Label>R</Label>
+        <input type="checkbox" formControlName="interessenS" name="S"><Label>S</Label>
+      </mat-list-item>
+    </mat-list>
     <mat-form-field>
       <mat-label>Newsletter</mat-label>
       <select matNativeControl formControlName="newsletter">

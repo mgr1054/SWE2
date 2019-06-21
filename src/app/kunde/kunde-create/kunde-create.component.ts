@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { KundenService } from '../kunden.service';
 import { toKunde } from '../../utils/tokunde';
+import { toInteressen } from '../../utils/toInteressen';
 import * as neuerKunde from './neuerKunde.json';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Kunde } from '../kunde.model';
@@ -26,7 +27,9 @@ export class KundeCreateComponent implements OnInit {
     this.form = new FormGroup({
       geschlecht: new FormControl(null, { validators: [Validators.required] }),
       nachname: new FormControl(null, { validators: [Validators.required] }),
-      interessen: new FormControl(null, { validators: [Validators.required] }),
+      interessenS: new FormControl(null),
+      interessenL: new FormControl(null),
+      interessenR: new FormControl(null),
       familienstand: new FormControl(null, { validators: [Validators.required] }),
       betrag: new FormControl(null, { validators: [Validators.required] }),
       waehrung: new FormControl(null, { validators: [Validators.required] }),
@@ -49,6 +52,7 @@ export class KundeCreateComponent implements OnInit {
         this.kundenService.getKunde(this.kID).subscribe(kundeData => {
           this.laedt = false;
           this.kunde = kundeData;
+          let ergArr = toInteressen(this.kunde.interessen);
           this.form.setValue({
             geschlecht: this.kunde.geschlecht,
             ort: this.kunde.adresse.ort,
@@ -61,7 +65,9 @@ export class KundeCreateComponent implements OnInit {
             password: 'dummy',
             newsletter: this.kunde.newsletter,
             kategorie: this.kunde.kategorie,
-            interessen: this.kunde.interessen,
+            interessenL: ergArr[0],
+            interessenR: ergArr[1],
+            interessenS: ergArr[2],
             homepage: this.kunde.homepage,
             familienstand: this.kunde.familienstand,
             plz: this.kunde.adresse.plz,
@@ -81,6 +87,7 @@ export class KundeCreateComponent implements OnInit {
     }
     this.laedt = true;
     let tempK = toKunde(this.form);
+    tempK.version = this.kunde.version;
     if (!this.mode) {
       this.kundenService.addKunde(tempK);
     } else {

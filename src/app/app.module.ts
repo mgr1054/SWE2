@@ -18,7 +18,9 @@ import {
   MatCheckboxModule,
   MatProgressSpinnerModule,
   MatPaginatorModule,
-  MatTabsModule
+  MatTabsModule,
+  MatListModule,
+  MatSlideToggleModule
 } from '@angular/material';
 import { AppRoutingModule } from './approuting.module';
 
@@ -38,7 +40,9 @@ import { AppRoutingModule } from './approuting.module';
     MatCheckboxModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
-    MatTabsModule
+    MatTabsModule,
+    MatListModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

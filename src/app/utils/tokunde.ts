@@ -1,3 +1,5 @@
+import { toInteressenArr } from './toInteressenArr';
+
 export function toKundenf(form: any) {
   let kunde = {
     id: form.id,
@@ -30,6 +32,11 @@ export function toKundenf(form: any) {
 }
 
 export function toKunde(form: any) {
+  let tArr = [];
+  tArr.push(form.value.interessenL);
+  tArr.push(form.value.interessenR);
+  tArr.push(form.value.interessenS);
+  tArr = toInteressenArr(tArr);
   let kunde = {
     id: null,
     nachname: String(form.value.nachname),
@@ -44,7 +51,7 @@ export function toKunde(form: any) {
     homepage: String(form.value.homepage),
     geschlecht: String(form.value.geschlecht),
     familienstand: String(form.value.familienstand),
-    interessen: [String(form.value.interessen)],
+    interessen: tArr,
     adresse: {
       plz: String(form.value.plz),
       ort: String(form.value.ort)
