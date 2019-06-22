@@ -1,11 +1,12 @@
 import { PostKunde, Kunde } from './kunde.model';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, fromEventPattern } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { toKundenf, toKundeme } from '../utils/tokunde';
 import { compare } from '../utils/compareObj';
 import { Router } from '@angular/router';
+import { extractArr } from '../utils/extractArr';
 
 @Injectable({ providedIn: 'root' })
 export class KundenService {
@@ -83,6 +84,7 @@ export class KundenService {
       Authorization: 'Basic ' + btoa('admin:p'),
       'If-Match': daten.version
     });
+    console.log(daten);
     if (!compare(daten, vgl)) {
       toKundenf(daten);
       this.http
@@ -135,76 +137,44 @@ export class KundenService {
     return res;
   }
 
-  findByEmail(email: String) {
+  findByParams(form) {
+    let paramArr = extractArr(form);
+    if (paramArr.length < 1) {
+      this.kunden = [];
+      this.kundenUpdated.next([...this.kunden]);
+      this.router.navigate(['/']);
+    }
+    let uri = `${this.url}/?`;
     let res;
-    let cut = email.length;
+    let cut = 0;
+    console.log(paramArr);
+    paramArr.forEach(element => {
+      if (uri === `${this.url}/?`) {
+        uri = uri.concat(element);
+      } else {
+        uri = uri.concat(`&${element}`);
+      }
+      cut += element.length;
+    });
+    cut += paramArr.length - 1;
+    console.log(cut);
     this.http
-      .get<any>(`${this.url}/?email=${email}`, {
+      .get<any>(uri, {
         headers: this.headers
       })
       .pipe(
         map(kundenData => {
           kundenData.map(kunde => {
-            kunde.id = kunde.links[0].href.slice(30 + cut);
+            kunde.id = kunde.links[0].href.slice(24 + cut);
           });
           return kundenData;
         })
       )
       .subscribe(kunde => {
         res = kunde;
-        this.kunden = [];
         this.kunden = res;
         this.kundenUpdated.next([...this.kunden]);
       });
-    return res;
-  }
-
-  findByNachnOrt(nachn: String, ort: String) {
-    let res;
-    let cut = nachn.length + ort.length;
-    this.http
-      .get<any>(`${this.url}/?nachname=${nachn}&ort=${ort}`, {
-        headers: this.headers
-      })
-      .pipe(
-        map(kundenData => {
-          kundenData.map(kunde => {
-            kunde.id = kunde.links[0].href.slice(38 + cut);
-          });
-          return kundenData;
-        })
-      )
-      .subscribe(kunde => {
-        res = kunde;
-        this.kunden = [];
-        this.kunden = res;
-        this.kundenUpdated.next([...this.kunden]);
-      });
-    return res;
-  }
-
-  findByNachnOrtPlz(nachn: String, ort: String, plz: String) {
-    let res;
-    let cut = nachn.length + ort.length + plz.length;
-    this.http
-      .get<any>(`${this.url}/?nachname=${nachn}&ort=${ort}&plz=${plz}`, {
-        headers: this.headers
-      })
-      .pipe(
-        map(kundenData => {
-          kundenData.map(kunde => {
-            kunde.id = kunde.links[0].href.slice(44 + cut);
-          });
-          return kundenData;
-        })
-      )
-      .subscribe(kunde => {
-        res = kunde;
-        this.kunden = [];
-        this.kunden = res;
-        this.kundenUpdated.next([...this.kunden]);
-      });
-    return res;
   }
 
   findByNachname(nachname: String) {
@@ -224,8 +194,7 @@ export class KundenService {
       )
       .subscribe(kunde => {
         res = kunde;
-        this.kunden = [];
-        this.kunden = res;
+        this.kunden = [res];
         this.kundenUpdated.next([...this.kunden]);
       });
     return res;

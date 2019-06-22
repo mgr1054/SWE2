@@ -1,66 +1,68 @@
 <mat-card>
   <mat-tab-group>
-    <mat-tab label="ID">
-      <form (submit)="onFindKundeByID()" [formGroup]="formByID">
+    <mat-tab label="FindByParams">
+      <form (submit)="onFindKundeByParams()" *ngIf="!laedt" [formGroup]="formByParams">
+        <mat-list>
+          <mat-list-item>
+            <mat-form-field>
+              <input matInput type="text" formControlName="nachname" placeholder="Nachname" />
+              <mat-error *ngIf="formByParams.get('nachname').invalid">Please enter a valid surname</mat-error>
+            </mat-form-field>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-form-field>
+              <input matInput type="text" formControlName="email" placeholder="Email" />
+              <mat-error *ngIf="formByParams.get('email').invalid">Please enter a valid email</mat-error>
+            </mat-form-field>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-form-field>
+              <input matInput type="text" formControlName="kategorie" placeholder="Kategorie" />
+              <mat-error *ngIf="formByParams.get('kategorie').invalid">Please enter a valid Kategorie</mat-error>
+            </mat-form-field>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-form-field>
+              <input matInput type="text" formControlName="geschlecht" placeholder="Geschlecht" />
+              <mat-error *ngIf="formByParams.get('geschlecht').invalid">Please enter a valid geschlecht</mat-error>
+            </mat-form-field>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-form-field>
+              <input matInput type="text" formControlName="familienstand" placeholder="Familienstand" />
+              <mat-error *ngIf="formByParams.get('familienstand').invalid">Please enter a valid familienstand
+              </mat-error>
+            </mat-form-field>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-form-field>
+              <input matInput type="text" formControlName="ort" placeholder="Ort" />
+              <mat-error *ngIf="formByParams.get('ort').invalid">Please enter a valid ort</mat-error>
+            </mat-form-field>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <mat-form-field>
+              <input matInput type="text" formControlName="plz" placeholder="PLZ" />
+              <mat-error *ngIf="formByParams.get('plz').invalid">Please enter a valid plz</mat-error>
+            </mat-form-field>
+          </mat-list-item>
+        </mat-list>
+        <button mat-raised-button color="accent" type="submit">
+          Save
+        </button>
+      </form>
+    </mat-tab>
+    <mat-tab label="findByID">
+      <form (submit)="onFindKundeByID()" *ngIf="!laedt" [formGroup]="formByID">
         <mat-form-field>
           <input matInput type="text" formControlName="id" placeholder="ID" />
           <mat-error *ngIf="formByID.get('id').invalid">Please enter a valid ID</mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="accent" type="submit">
-          Save
-        </button>
-      </form>
-    </mat-tab>
-    <mat-tab label="Nachname">
-      <form (submit)="onFindKundeByNachname()" [formGroup]="formByNachname">
-        <mat-form-field>
-          <input matInput type="text" formControlName="nachn" placeholder="Nachname" />
-          <mat-error *ngIf="formByNachname.get('nachn').invalid">Please enter a valid Nachname</mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="accent" type="submit">
-          Save
-        </button>
-      </form>
-    </mat-tab>
-    <mat-tab label="Email">
-      <form (submit)="onFindKundeByEmail()" [formGroup]="formByEmail">
-        <mat-form-field>
-          <input matInput type="text" formControlName="email" placeholder="Email" />
-          <mat-error *ngIf="formByEmail.get('email').invalid">Please enter a valid Email</mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="accent" type="submit">
-          Save
-        </button>
-      </form>
-    </mat-tab>
-    <mat-tab label="Nachname und Ort">
-      <form (submit)="onFindKundeByNachnOrt()" [formGroup]="formByNachnOrt">
-        <mat-form-field>
-          <input matInput type="text" formControlName="nachn" placeholder="Nachname" />
-          <mat-error *ngIf="formByNachnOrt.get('nachn').invalid">Please enter a valid ID</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput type="text" formControlName="ort" placeholder="Ort" />
-          <mat-error *ngIf="formByNachnOrt.get('ort').invalid">Please enter a valid Ort</mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="accent" type="submit">
-          Save
-        </button>
-      </form>
-    </mat-tab>
-    <mat-tab label="Nachname und Ort und PLZ">
-      <form (submit)="onFindKundeByNachnOrtPlz()" [formGroup]="formByNachnOrtPlz">
-        <mat-form-field>
-          <input matInput type="text" formControlName="nachn" placeholder="Nachname" />
-          <mat-error *ngIf="formByNachnOrtPlz.get('nachn').invalid">Please enter a valid Nachname</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput type="text" formControlName="ort" placeholder="Ort" />
-          <mat-error *ngIf="formByNachnOrtPlz.get('ort').invalid">Please enter a valid Ort</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput type="text" formControlName="plz" placeholder="PLZ" />
-          <mat-error *ngIf="formByNachnOrtPlz.get('plz').invalid">Please enter a valid PLZ</mat-error>
         </mat-form-field>
         <button mat-raised-button color="accent" type="submit">
           Save

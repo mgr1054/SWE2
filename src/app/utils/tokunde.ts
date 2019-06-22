@@ -15,7 +15,7 @@ export function toKundenf(form: any) {
     homepage: String(form.homepage),
     geschlecht: String(form.geschlecht),
     familienstand: String(form.familienstand),
-    interessen: [String(form.interessen)],
+    interessen: form.interessen,
     adresse: {
       plz: String(form.adresse.plz),
       ort: String(form.adresse.ort)

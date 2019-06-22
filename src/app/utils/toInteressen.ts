@@ -1,5 +1,5 @@
 export function toInteressen(arrayofInterest: String[]) {
-  if (arrayofInterest != null) {
+  if (arrayofInterest != null && arrayofInterest != undefined) {
     let ergArr = [false, false, false];
     if (arrayofInterest.includes('L')) {
       ergArr[0] = true;

@@ -20,7 +20,8 @@ import {
   MatPaginatorModule,
   MatTabsModule,
   MatListModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatDividerModule
 } from '@angular/material';
 import { AppRoutingModule } from './approuting.module';
 
@@ -42,7 +43,8 @@ import { AppRoutingModule } from './approuting.module';
     MatPaginatorModule,
     MatTabsModule,
     MatListModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
