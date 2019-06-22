@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { Kunde } from '../kunde.model';
 import { KundenService } from '../kunden.service';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatSnackBar } from '@angular/material';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -17,8 +17,9 @@ export class KundeListComponent implements OnInit, OnDestroy {
   laedt = false;
   formByID: FormGroup;
   formByParams: FormGroup;
+  snacken;
 
-  constructor(public kundenService: KundenService) {}
+  constructor(public kundenService: KundenService, private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.formByID = new FormGroup({
@@ -37,6 +38,10 @@ export class KundeListComponent implements OnInit, OnDestroy {
       this.laedt = false;
       this.kunden = kunden;
     });
+    this.kundenService.snack_val.subscribe(val => (this.snacken = val));
+    if (this.snacken.smthWrong) {
+      this.openSnackBar(this.snacken.message);
+    }
   }
 
   onDelete(kundenID: string) {
@@ -51,6 +56,12 @@ export class KundeListComponent implements OnInit, OnDestroy {
 
   onFindKundeByParams() {
     this.kundenService.findByParams(this.formByParams);
+  }
+
+  openSnackBar(message) {
+    this._snackBar.open(message, 'OK', {
+      duration: 7000
+    });
   }
 
   //prevent mem leaks

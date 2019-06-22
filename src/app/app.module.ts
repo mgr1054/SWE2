@@ -21,7 +21,8 @@ import {
   MatTabsModule,
   MatListModule,
   MatSlideToggleModule,
-  MatDividerModule
+  MatDividerModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { AppRoutingModule } from './approuting.module';
 import { KundeLoginComponent } from './kunde/kunde-login/kunde-login.component';
@@ -45,7 +46,8 @@ import { KundeLoginComponent } from './kunde/kunde-login/kunde-login.component';
     MatTabsModule,
     MatListModule,
     MatSlideToggleModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

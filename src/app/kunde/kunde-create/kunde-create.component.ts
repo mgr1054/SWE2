@@ -88,10 +88,12 @@ export class KundeCreateComponent implements OnInit {
     }
     this.laedt = true;
     let tempK = toKunde(this.form);
-    tempK.version = this.kunde.version;
+
     if (!this.mode) {
+      tempK.version = 0;
       this.kundenService.addKunde(tempK);
     } else {
+      tempK.version = this.kunde.version;
       tempK.id = this.kID;
       tempK.username = this.kunde.username;
       tempK.user = this.kunde.user;
