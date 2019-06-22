@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { KundenService } from '../kunden.service';
 import { toKunde } from '../../utils/tokunde';
@@ -6,6 +6,7 @@ import { toInteressen } from '../../utils/toInteressen';
 import * as neuerKunde from './neuerKunde.json';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Kunde } from '../kunde.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-kunde-create',
@@ -13,13 +14,12 @@ import { Kunde } from '../kunde.model';
   styleUrls: ['./kunde-create.component.css']
 })
 export class KundeCreateComponent implements OnInit {
-  enteredContent = '';
-  enteredTitle = '';
   public mode = false;
   private kID: string;
   public kunde: Kunde;
   laedt = false;
   form: FormGroup;
+  loggedstat;
 
   constructor(public kundenService: KundenService, public route: ActivatedRoute) {}
 
@@ -78,6 +78,7 @@ export class KundeCreateComponent implements OnInit {
         this.mode = false;
         this.kID = null;
       }
+      this.kundenService.logged.subscribe(logging => (this.loggedstat = logging));
     });
   }
 

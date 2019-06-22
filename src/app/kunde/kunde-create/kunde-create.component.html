@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="loggedstat">
   <mat-spinner *ngIf="laedt"></mat-spinner>
   <form (submit)="onSaveKunde()" *ngIf="!laedt" [formGroup]="form">
     <mat-form-field>
@@ -77,4 +77,7 @@
       Save
     </button>
   </form>
+</mat-card>
+<mat-card *ngIf="!loggedstat">
+  <h3>You are not logged in, therefore you cant add new Kunden, nor can you edit or delete Kunden</h3>
 </mat-card>

@@ -24,9 +24,10 @@ import {
   MatDividerModule
 } from '@angular/material';
 import { AppRoutingModule } from './approuting.module';
+import { KundeLoginComponent } from './kunde/kunde-login/kunde-login.component';
 
 @NgModule({
-  declarations: [AppComponent, KundeCreateComponent, HeaderComponent, KundeListComponent],
+  declarations: [AppComponent, KundeCreateComponent, HeaderComponent, KundeListComponent, KundeLoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

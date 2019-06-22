@@ -1,6 +1,6 @@
 import { PostKunde, Kunde } from './kunde.model';
 import { Injectable } from '@angular/core';
-import { Subject, fromEventPattern } from 'rxjs';
+import { Subject, fromEventPattern, BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { toKundenf, toKundeme } from '../utils/tokunde';
@@ -17,6 +17,8 @@ export class KundenService {
     Authorization: 'Basic ' + btoa('admin:p')
   });
   private url = 'http://localhost:4200/rest';
+  private loggedUpdated = new BehaviorSubject(false);
+  logged = this.loggedUpdated.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -147,7 +149,6 @@ export class KundenService {
     let uri = `${this.url}/?`;
     let res;
     let cut = 0;
-    console.log(paramArr);
     paramArr.forEach(element => {
       if (uri === `${this.url}/?`) {
         uri = uri.concat(element);
@@ -157,7 +158,6 @@ export class KundenService {
       cut += element.length;
     });
     cut += paramArr.length - 1;
-    console.log(cut);
     this.http
       .get<any>(uri, {
         headers: this.headers
@@ -198,5 +198,33 @@ export class KundenService {
         this.kundenUpdated.next([...this.kunden]);
       });
     return res;
+  }
+
+  login(form) {
+    let username = form.value.username;
+    let password = form.value.password;
+
+    const headersLog = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Basic ' + btoa(`${username}:${password}`)
+    });
+
+    this.http.get(`${this.url}/`, { headers: headersLog, observe: 'response' }).subscribe(responseData => {
+      let respCode = responseData.status;
+      console.log(respCode);
+      if (respCode === 200) {
+        this.loggedUpdated.next(true);
+        console.log(this.logged);
+        console.log(this.loggedUpdated);
+        let b;
+        this.logged.subscribe(msg => (b = msg));
+        console.log(b);
+        this.router.navigate(['/']);
+      } else {
+        console.log('failed login');
+        this.loggedUpdated.next(false);
+        this.router.navigate(['/login']);
+      }
+    });
   }
 }
