@@ -126,6 +126,7 @@ export class KundenService {
   }
 
   deleteKunde(kundenID: string) {
+    console.log(kundenID);
     this.http
       .delete(`${this.url}/` + kundenID, {
         headers: this.headers
@@ -196,7 +197,7 @@ export class KundenService {
       .pipe(
         map(kundenData => {
           kundenData.map(kunde => {
-            kunde.id = kunde.links[0].href.slice(24 + cut);
+            kunde.id = kunde.links[0].href.slice(23 + cut);
           });
           return kundenData;
         })
