@@ -1,12 +1,14 @@
-<mat-toolbar>
-  <span><a routerLink="">Kunden</a> </span>
+<mat-toolbar color=primary>
+  <span>
+    <a routerLink="/" class="logo">
+      <img src="assets/img/logo.png" style="width:40px;height:40px;">
+    </a>
+  </span>
   <span class="spacer"></span>
-  <ul>
-    <li>
-      <a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a>
-    </li>
-    <li>
-      <a mat-button routerLink="/create" routerLinkActive="mat-accent">Create a new Kunde</a>
-    </li>
-  </ul>
+  <a mat-button routerLink="/create" routerLinkActive="mat-accent" class="login">
+    <img src="assets/img/neuerkunde.png" style="width:30px;height:30px;">
+  </a>
+  <a mat-button routerLink="/login" routerLinkActive="mat-accent" class="new-kunde">
+    <img src="assets/img/sign-in-alt-solid.png" style="width:20px;height:20px;">
+  </a>
 </mat-toolbar>
