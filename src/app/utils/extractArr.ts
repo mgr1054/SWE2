@@ -1,7 +1,7 @@
 export function extractArr(form) {
   let ergArr = [];
-  if (form.value.emai != null && form.value.emai != undefined) {
-    ergArr.push(`email=${form.value.emai}`);
+  if (form.value.email != null && form.value.email != undefined) {
+    ergArr.push(`email=${form.value.email}`);
   }
   if (form.value.ort != null && form.value.ort != undefined) {
     ergArr.push(`ort=${form.value.ort}`);

@@ -189,7 +189,8 @@ export class KundenService {
       }
       cut += element.length;
     });
-    cut += paramArr.length - 1;
+    cut += paramArr.length;
+    console.log(uri);
     this.http
       .get<any>(uri, {
         headers: this.headers
