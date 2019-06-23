@@ -13,3 +13,17 @@ mat-spinner {
 mat-paginator {
   margin-top: 1rem;
 }
+
+.formular {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+mat-accordion {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+mat-card {
+  background: white;
+}
