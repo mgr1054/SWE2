@@ -1,6 +1,9 @@
 <div class="formular">
   <mat-card>
     <form (submit)="onLogin()" *ngIf="!laedt" [formGroup]="formLogin">
+      <mat-card-header>
+        <mat-card-title>LOGIN</mat-card-title>
+      </mat-card-header>
       <mat-list>
         <mat-list-item>
           <mat-form-field>
@@ -8,13 +11,13 @@
             <mat-error *ngIf="formLogin.get('username').invalid">Bitte validen Benutzernamen eingeben</mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput type="password" formControlName="password" placeholder="Password" />
+            <input matInput type="password" formControlName="password" placeholder="Passwort" />
             <mat-error *ngIf="formLogin.get('password').invalid">Bitte vaildes Passwort eingeben</mat-error>
           </mat-form-field>
         </mat-list-item>
       </mat-list>
       <button mat-raised-button color="accent" type="submit" class="button">
-        anmelden
+        Anmelden
       </button>
     </form>
   </mat-card>
