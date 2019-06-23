@@ -1,6 +1,8 @@
-# Ng7
+# SWE2
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0-beta.15.
+Dieses Projekt ist die 2. Abgabe für SWE von Marius, Max und Chris.
+Es wurde mit [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0-beta.15 erstellt.
+
 
 ## Development server
 

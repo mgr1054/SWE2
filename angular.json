@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng7": {
+    "SWE2": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ng7",
+            "outputPath": "dist/SWE2",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -63,19 +63,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng7:build",
+            "browserTarget": "SWE2:build",
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ng7:build:production"
+              "browserTarget": "SWE2:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng7:build"
+            "browserTarget": "SWE2:build"
           }
         },
         "test": {
@@ -113,16 +113,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ng7:serve"
+            "devServerTarget": "SWE2:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ng7:serve:production"
+              "devServerTarget": "SWE2:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "ng7"
+  "defaultProject": "SWE2"
 }

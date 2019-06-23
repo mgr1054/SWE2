@@ -7,3 +7,7 @@
 .button {
     margin-top: 22px;
 }
+
+mat-form-field {
+    margin: 5px;
+  }
