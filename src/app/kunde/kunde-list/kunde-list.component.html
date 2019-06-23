@@ -21,8 +21,7 @@
           </mat-form-field>
           <mat-form-field>
             <input matInput type="text" formControlName="familienstand" placeholder="Familienstand" />
-            <mat-error *ngIf="formByParams.get('familienstand').invalid"
-              >Bitte validen Familienstand eingeben
+            <mat-error *ngIf="formByParams.get('familienstand').invalid">Bitte validen Familienstand eingeben
             </mat-error>
           </mat-form-field>
           <mat-form-field>
@@ -36,9 +35,6 @@
           <button mat-raised-button color="accent" type="submit" class="button_param">
             suchen
           </button>
-          <button mat-raised-button color="primary" type="reset" class="button_id">
-            reset
-          </button>
         </form>
       </mat-tab>
       <mat-tab label="Nach ID suchen">
@@ -49,9 +45,6 @@
           </mat-form-field>
           <button mat-raised-button color="accent" type="submit" class="button_id">
             suchen
-          </button>
-          <button mat-raised-button color="accent" type="reset" class="button_id">
-            reset
           </button>
         </form>
       </mat-tab>
