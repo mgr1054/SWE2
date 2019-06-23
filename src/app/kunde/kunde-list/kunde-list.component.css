@@ -24,6 +24,11 @@ mat-paginator {
   margin-top: 10px;
   margin-bottom: 100px;
 }
+
+mat-form-field {
+  margin: 5px;
+}
+
 mat-accordion {
   width: 80%;
 }

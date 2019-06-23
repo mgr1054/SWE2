@@ -19,7 +19,7 @@ export class KundeListComponent implements OnInit, OnDestroy {
   formByParams: FormGroup;
   snacken;
 
-  constructor(public kundenService: KundenService, private _snackBar: MatSnackBar) {}
+  constructor(public kundenService: KundenService, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.formByID = new FormGroup({
@@ -48,7 +48,7 @@ export class KundeListComponent implements OnInit, OnDestroy {
     this.kundenService.deleteKunde(kundenID);
   }
 
-  onChangedPage(pageData: PageEvent) {}
+  onChangedPage(pageData: PageEvent) { }
 
   onFindKundeByID() {
     this.kundenService.findByID(this.formByID.value.id);
@@ -64,7 +64,7 @@ export class KundeListComponent implements OnInit, OnDestroy {
     });
   }
 
-  //prevent mem leaks
+  // prevent mem leaks
   ngOnDestroy() {
     this.kundenSubsc.unsubscribe();
   }

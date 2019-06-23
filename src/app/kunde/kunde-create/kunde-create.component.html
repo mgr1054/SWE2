@@ -4,15 +4,15 @@
     <form (submit)="onSaveKunde()" *ngIf="!laedt" [formGroup]="form">
       <mat-form-field>
         <input matInput type="text" formControlName="nachname" placeholder="Nachname" />
-        <mat-error *ngIf="form.get('nachname').invalid">Please enter a valid surname</mat-error>
+        <mat-error *ngIf="form.get('nachname').invalid">Bitte validen Nachnamen eingeben</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput type="text" formControlName="email" placeholder="Email" />
-        <mat-error *ngIf="form.get('email').invalid">Please enter a valid email</mat-error>
+        <mat-error *ngIf="form.get('email').invalid">Bitte valide Email eingeben</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput type="text" formControlName="kategorie" placeholder="Kategorie" />
-        <mat-error *ngIf="form.get('kategorie').invalid">Please enter a valid kategory </mat-error>
+        <mat-error *ngIf="form.get('kategorie').invalid">Bitte valide Kategorie eingeben</mat-error>
       </mat-form-field>
       <mat-list>+
         <mat-label>Interessen</mat-label>
@@ -28,51 +28,51 @@
           <option value="false">false</option>
           <option value="true">true</option>
         </select>
-        <mat-error *ngIf=" form.get('newsletter').invalid">Please enter a valid newsletter</mat-error>
+        <mat-error *ngIf=" form.get('newsletter').invalid">Bitte Newsletter auswählen</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput type="date" formControlName="geburtsdatum" placeholder="Geburtsdatum" />
-        <mat-error *ngIf="form.get('geburtsdatum').invalid">Please enter a valid birthdate</mat-error>
+        <mat-error *ngIf="form.get('geburtsdatum').invalid">Bitte valides Geburtsdatum eingeben</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput type="text" formControlName="plz" placeholder="PLZ" />
-        <mat-error *ngIf="form.get('plz').invalid">Please enter a valid PLZ</mat-error>
+        <mat-error *ngIf="form.get('plz').invalid">Bitte valide Postleitzahl eingeben</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput type="text" formControlName="ort" placeholder="Ort" />
-        <mat-error *ngIf="form.get('ort').invalid">Please enter a valid Ort</mat-error>
+        <mat-error *ngIf="form.get('ort').invalid">Bitte validen Ort eingeben</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput type="text" formControlName="homepage" placeholder="Homepage" />
-        <mat-error *ngIf="form.get('homepage').invalid">Please enter a valid homepage</mat-error>
+        <mat-error *ngIf="form.get('homepage').invalid">Bitte valide Homepage eingeben</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput type="text" formControlName="geschlecht" maxlength="1" placeholder="Geschlecht" />
-        <mat-error *ngIf="form.get('geschlecht').invalid">Please enter a valid sex</mat-error>
+        <mat-error *ngIf="form.get('geschlecht').invalid">Bitte valides Geschlecht eingeben</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput type="text" formControlName="familienstand" placeholder="Familienstand" />
-        <mat-error *ngIf="form.get('familienstand').invalid">Please enter a valid familienstand</mat-error>
+        <mat-error *ngIf="form.get('familienstand').invalid">Bitte validen Familienstand eingeben</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput type="text" formControlName="waehrung" placeholder="Waehrung" />
-        <mat-error *ngIf="form.get('waehrung').invalid">Please enter a valid waehrung</mat-error>
+        <mat-error *ngIf="form.get('waehrung').invalid">Bitte valide Währung eingeben</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput type="text" formControlName="betrag" placeholder="Betrag" />
-        <mat-error *ngIf="form.get('betrag').invalid">Please enter a valid betrag</mat-error>
+        <mat-error *ngIf="form.get('betrag').invalid">Bitte validen Betrag eingeben</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput type="text" formControlName="username" placeholder="Username" />
-        <mat-error *ngIf="form.get('username').invalid">Please enter a valid username</mat-error>
+        <mat-error *ngIf="form.get('username').invalid">Bitte validen Benutzernamen eingeben</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput type="password" formControlName="password" minlength=" 3" placeholder="" />
-        <mat-error *ngIf="form.get('password').invalid">Please enter a valid password</mat-error>
+        <mat-error *ngIf="form.get('password').invalid">Bitte valides Passwort eingeben</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput type="text" formControlName="version" placeholder="Version" />
-        <mat-error *ngIf="form.get('version').invalid">Please enter a valid version</mat-error>
+        <mat-error *ngIf="form.get('version').invalid">Bitte valide Version eingeben</mat-error>
       </mat-form-field>
       <button mat-raised-button color="accent" type="submit">
         anlegen
