@@ -15,15 +15,30 @@ mat-paginator {
 }
 
 .formular {
-  margin-left: 5%;
-  margin-right: 5%;
+  width: 80%;
+  margin: auto;
+  box-shadow: 0px 0px 10px 5px lightgray;
 }
 
+.liste {
+  margin-top: 10px;
+  margin-bottom: 100px;
+}
 mat-accordion {
-  margin-left: 5%;
-  margin-right: 5%;
+  width: 80%;
 }
 
 mat-card {
   background: white;
+}
+
+.button_param {
+  margin-left: 15px;
+}
+
+.button_id {
+  margin-left: 5px;
+}
+.ID_input {
+  margin-left: 15px;
 }
