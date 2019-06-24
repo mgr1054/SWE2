@@ -1,6 +1,6 @@
-<div class="formular">
-  <mat-card>
-    <form (submit)="onLogin()" *ngIf="!laedt" [formGroup]="formLogin">
+<div class="formular" *ngIf="!loggedstat">
+  <mat-card *ngIf="!loggedstat">
+    <form (submit)="onLogin()" *ngIf="!laedt && !loggedstat" [formGroup]="formLogin">
       <mat-card-header>
         <mat-card-title>LOGIN</mat-card-title>
       </mat-card-header>
@@ -22,3 +22,7 @@
     </form>
   </mat-card>
 </div>
+<mat-card *ngIf="loggedstat">
+  <h4>Sie sind bereits eingeloggt</h4>
+  <button mat-raised-button color="accent" on-click="onLogout()" class="button">Logout</button>
+</mat-card>
