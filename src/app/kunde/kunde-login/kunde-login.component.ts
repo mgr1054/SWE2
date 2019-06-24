@@ -27,4 +27,8 @@ export class KundeLoginComponent implements OnInit {
   onLogin() {
     this.kundenService.login(this.formLogin);
   }
+
+  onLogout() {
+    this.kundenService.logout();
+  }
 }

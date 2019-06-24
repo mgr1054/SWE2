@@ -183,6 +183,7 @@ export class KundenService {
     let cut = 0;
     paramArr.forEach(element => {
       if (uri === `${this.url}/?`) {
+        cut += 1;
         uri = uri.concat(element);
       } else {
         uri = uri.concat(`&${element}`);
@@ -198,7 +199,7 @@ export class KundenService {
       .pipe(
         map(kundenData => {
           kundenData.map(kunde => {
-            kunde.id = kunde.links[0].href.slice(23 + cut);
+            kunde.id = kunde.links[0].href.slice(22 + cut);
           });
           return kundenData;
         })
@@ -210,6 +211,8 @@ export class KundenService {
           this.kundenUpdated.next([...this.kunden]);
         },
         error => {
+          this.kunden = [];
+          this.kundenUpdated.next([...this.kunden]);
           this.snack.next({ smthWrong: true, message: error.message });
           this.router.navigate(['/']);
         }
@@ -241,5 +244,10 @@ export class KundenService {
         this.router.navigate(['/']);
       }
     );
+  }
+
+  logout() {
+    this.loggedUpdated.next(false);
+    this.router.navigate(['/']);
   }
 }
