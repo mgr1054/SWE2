@@ -26,9 +26,17 @@ import {
 } from '@angular/material';
 import { AppRoutingModule } from './approuting.module';
 import { KundeLoginComponent } from './kunde/kunde-login/kunde-login.component';
+import { KundeProfileComponent } from './kunde/kunde-profile/kunde-profile.component';
 
 @NgModule({
-  declarations: [AppComponent, KundeCreateComponent, HeaderComponent, KundeListComponent, KundeLoginComponent],
+  declarations: [
+    AppComponent,
+    KundeCreateComponent,
+    HeaderComponent,
+    KundeListComponent,
+    KundeLoginComponent,
+    KundeProfileComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

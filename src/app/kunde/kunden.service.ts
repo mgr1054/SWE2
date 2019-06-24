@@ -19,36 +19,14 @@ export class KundenService {
   private url = 'http://localhost:4200/rest';
   private loggedUpdated = new BehaviorSubject(false);
   logged = this.loggedUpdated.asObservable();
+  private kundeUpdated = new BehaviorSubject(undefined);
+  kundeVal = this.kundeUpdated.asObservable();
+  username;
 
-  private snack = new BehaviorSubject({ smthWrong: false, message: undefined });
+  private snack = new BehaviorSubject({ smthWrong: false, message: undefined, code: undefined });
   snack_val = this.snack.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {}
-
-  getKunden() {
-    this.http
-      .get<any[]>(`${this.url}/`, {
-        headers: this.headers
-      })
-      .pipe(
-        map(kundenData => {
-          kundenData.map(kunde => {
-            kunde.id = kunde.links[0].href.slice(22);
-          });
-          return kundenData;
-        })
-      )
-      .subscribe(
-        kundenTrans => {
-          this.kunden = kundenTrans;
-          this.kundenUpdated.next([...this.kunden]);
-        },
-        error => {
-          this.snack.next({ smthWrong: true, message: error.message });
-          this.router.navigate(['/']);
-        }
-      );
-  }
 
   getKunde(id: string) {
     return this.http
@@ -83,7 +61,7 @@ export class KundenService {
           this.router.navigate(['/']);
         },
         error => {
-          this.snack.next({ smthWrong: true, message: error.message });
+          this.snack.next({ smthWrong: true, message: error.message, code: error.code });
           this.router.navigate(['/']);
         }
       );
@@ -116,7 +94,7 @@ export class KundenService {
             this.router.navigate(['/']);
           },
           error => {
-            this.snack.next({ smthWrong: true, message: error.message });
+            this.snack.next({ smthWrong: true, message: error.message, code: error.code });
             this.router.navigate(['/']);
           }
         );
@@ -126,7 +104,6 @@ export class KundenService {
   }
 
   deleteKunde(kundenID: string) {
-    console.log(kundenID);
     this.http
       .delete(`${this.url}/` + kundenID, {
         headers: this.headers
@@ -138,7 +115,7 @@ export class KundenService {
           this.kundenUpdated.next([...this.kunden]);
         },
         error => {
-          this.snack.next({ smthWrong: true, message: error.message });
+          this.snack.next({ smthWrong: true, message: error.message, code: error.code });
           this.router.navigate(['/']);
         }
       );
@@ -164,7 +141,7 @@ export class KundenService {
           this.kundenUpdated.next([...this.kunden]);
         },
         error => {
-          this.snack.next({ smthWrong: true, message: error.message });
+          this.snack.next({ smthWrong: true, message: error.message, code: error.code });
           this.router.navigate(['/']);
         }
       );
@@ -173,11 +150,7 @@ export class KundenService {
 
   findByParams(form) {
     let paramArr = extractArr(form);
-    if (paramArr.length < 1) {
-      this.kunden = [];
-      this.kundenUpdated.next([...this.kunden]);
-      this.router.navigate(['/']);
-    }
+
     let uri = `${this.url}/?`;
     let res;
     let cut = 0;
@@ -191,7 +164,7 @@ export class KundenService {
       cut += element.length;
     });
     cut += paramArr.length;
-    console.log(uri);
+
     this.http
       .get<any>(uri, {
         headers: this.headers
@@ -209,11 +182,12 @@ export class KundenService {
           res = kunde;
           this.kunden = res;
           this.kundenUpdated.next([...this.kunden]);
+          console.log(this.kunden);
         },
         error => {
           this.kunden = [];
           this.kundenUpdated.next([...this.kunden]);
-          this.snack.next({ smthWrong: true, message: error.message });
+          this.snack.next({ smthWrong: true, message: error.message, code: error.code });
           this.router.navigate(['/']);
         }
       );
@@ -240,7 +214,7 @@ export class KundenService {
         }
       },
       error => {
-        this.snack.next({ smthWrong: true, message: error.message });
+        this.snack.next({ smthWrong: true, message: error.message, code: error.status });
         this.router.navigate(['/']);
       }
     );
@@ -249,5 +223,32 @@ export class KundenService {
   logout() {
     this.loggedUpdated.next(false);
     this.router.navigate(['/']);
+  }
+
+  resetSubject() {
+    this.snack.next({ smthWrong: false, message: undefined, code: undefined });
+  }
+
+  async viewProfile() {
+    let kundenArr;
+
+    await this.http
+      .get(`${this.url}`, {
+        headers: this.headers
+      })
+      .subscribe(
+        kunde => {
+          kundenArr = kunde;
+          kundenArr = kundenArr.filter(kunde => kunde.username == this.username);
+          this.kundeUpdated.next(kundenArr);
+          this.router.navigate(['/profile']);
+        },
+        error => {
+          this.kunden = [];
+          this.kundenUpdated.next([...this.kunden]);
+          this.snack.next({ smthWrong: true, message: error.message, code: error.code });
+          this.router.navigate(['/']);
+        }
+      );
   }
 }

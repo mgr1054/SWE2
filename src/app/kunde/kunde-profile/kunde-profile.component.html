@@ -1,0 +1,50 @@
+<div class="formular">
+  <mat-card>
+    <div class="center">
+      <mat-list *ngFor="let kundeV of kunde">
+        <mat-list-item>
+          <img src="assets/img/default-profile.png" alt="Profilbild" style="width:120px;height:120px;">
+        </mat-list-item>
+        <div class="name">
+          <h2>
+            {{ kundeV.nachname }}
+          </h2>
+        </div>
+        <p>
+          {{ kundeV.email }}
+        </p>
+        <p>
+          {{ kundeV.adresse.plz }} {{ kundeV.adresse.ort}}
+        </p>
+        <div class="tabelle">
+          <div class="item">
+            <h6>
+              Umsatz
+            </h6>
+            <p>
+              {{ kundeV.umsatz.betrag }} {{ kundeV.umsatz.waehrung }}
+            </p>
+          </div>
+          <div class="item">
+            <h6>
+              Interessen
+            </h6>
+            <p>
+              {{ kundeV.interessen }}
+            </p>
+          </div>
+          <div class="item">
+            <h6>
+              Kategorie
+            </h6>
+            <p>
+              {{ kundeV.kategorie }}
+            </p>
+          </div>
+        </div>
+      </mat-list>
+      <p class="info-text" *ngIf="!kunde">Keine Daten gefunden</p>
+      <button mat-raised-button color="accent" (click)="nachHause()">Startseite</button>
+    </div>
+  </mat-card>
+</div>
