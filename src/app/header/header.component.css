@@ -5,17 +5,14 @@
 .logo {
   float: left !important;
   padding-top: 8px;
-  margin-left: 75px;
-}
-
-.login {
-  margin-right:25px;
 }
 
 .new-kunde {
-  margin-right: 75px;
+  margin-right: 5%;
 }
 
 mat-toolbar {
   box-shadow: 0px 0px 10px 5px lightgray;
+  padding-left: 7%;
+  padding-right: 7%;
 }
