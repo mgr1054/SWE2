@@ -230,9 +230,6 @@ export class KundenService {
   }
 
   async viewProfile() {
-    if (!this.loggedUpdated) {
-      this.router.navigate(['/']);
-    }
     let kundenArr;
 
     await this.http
