@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+.info-text {
+  text-align: center;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+.liste {
+  margin-top: 10px;
+  margin-bottom: 100px;
+}
+
+mat-form-field {
+  margin: 5px;
+}
+
+mat-accordion {
+  width: 80%;
+}
+
+mat-card {
+  background: white;
+}
+
+.button_param {
+  margin-left: 15px;
+}
+
+.button_id {
+  margin-left: 5px;
+}
+.ID_input {
+  margin-left: 15px;
+}

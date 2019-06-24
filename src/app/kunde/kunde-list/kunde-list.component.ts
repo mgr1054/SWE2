@@ -40,7 +40,7 @@ export class KundeListComponent implements OnInit, OnDestroy {
     });
     this.kundenService.snack_val.subscribe(val => (this.snacken = val));
     if (this.snacken.smthWrong) {
-      this.openSnackBar(this.snacken.message);
+      this.openSnackBar(this.snacken.message, this.snacken.code);
     }
   }
 
@@ -59,10 +59,17 @@ export class KundeListComponent implements OnInit, OnDestroy {
     this.formByParams.reset();
   }
 
-  openSnackBar(message) {
-    this._snackBar.open(message, 'OK', {
-      duration: 7000
-    });
+  openSnackBar(message, code) {
+    if (code == 400) {
+      this._snackBar.open(`Sie haben ungueltige Daten angegeben! Statuscode: ${code}`, 'OK', {
+        duration: 7000
+      });
+    } else {
+      this._snackBar.open(`Ein Fehler ist aufgetreten! Statuscode: ${code}`, 'OK', {
+        duration: 7000
+      });
+    }
+    this.kundenService.resetSubject();
   }
 
   // prevent mem leaks

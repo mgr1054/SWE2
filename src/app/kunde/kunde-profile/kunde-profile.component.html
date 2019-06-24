@@ -1,0 +1,30 @@
+<div class="liste">
+  <mat-list *ngFor="let kundeV of kunde">
+    <mat-list-item>
+      {{ kundeV.nachname }}
+    </mat-list-item>
+    <mat-list-item>
+      {{ kundeV.interessen }}
+    </mat-list-item>
+    <mat-list-item>
+      {{ kundeV.email }}
+    </mat-list-item>
+    <mat-list-item>
+      {{ kundeV.umsatz.waehrung }}
+    </mat-list-item>
+    <mat-list-item>
+      {{ kundeV.umsatz.betrag }}
+    </mat-list-item>
+    <mat-list-item>
+      {{ kundeV.adresse.plz }}
+    </mat-list-item>
+    <mat-list-item>
+      {{ kundeV.adresse.ort }}
+    </mat-list-item>
+    <mat-list-item>
+      {{ kundeV.kategorie }}
+    </mat-list-item>
+  </mat-list>
+</div>
+<button mat-button color="accent" (click)="nachHause()">Nach Hause</button>
+<p class="info-text" *ngIf="!kunde">Keine Daten gefunden</p>

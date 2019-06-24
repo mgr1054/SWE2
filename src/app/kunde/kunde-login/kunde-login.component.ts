@@ -13,6 +13,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class KundeLoginComponent implements OnInit {
   formLogin: FormGroup;
   loggedstat;
+  public username;
 
   constructor(public kundenService: KundenService) {}
 
@@ -26,9 +27,14 @@ export class KundeLoginComponent implements OnInit {
 
   onLogin() {
     this.kundenService.login(this.formLogin);
+    this.kundenService.username = this.formLogin.value.username;
   }
 
   onLogout() {
     this.kundenService.logout();
+  }
+
+  onViewProfile() {
+    this.kundenService.viewProfile();
   }
 }
