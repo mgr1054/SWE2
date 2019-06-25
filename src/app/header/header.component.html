@@ -5,7 +5,7 @@
     </a>
   </span>
   <span class="spacer"></span>
-  <a mat-button routerLink="/profile" *ngIf="logged" routerLinkActive="mat-accent" class="profile" title="profile">
+  <a mat-button (click)="onProfileClick()" *ngIf="logged" routerLinkActive="mat-accent" class="profile" title="profile">
     <img src="assets/img/profil.png" style="width:26px;height:25px;" />
   </a>
   <a mat-button routerLink="/create" routerLinkActive="mat-accent" class="new-kunde" title="Neuer Kunde">
