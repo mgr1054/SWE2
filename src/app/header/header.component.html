@@ -11,7 +11,7 @@
   <a mat-button routerLink="/login" routerLinkActive="mat-accent" class="login" title="Login">
     <img src="assets/img/sign-in-alt-solid.png" alt="login" style="width:26px;height:20px;" />
   </a>
-  <a mat-button routerLink="/profile" *ngIf="logged" routerLinkActive="mat-accent" class="login" title="profile">
+  <a mat-button (click)="onProfileClick()" *ngIf="logged" routerLinkActive="mat-accent" class="login" title="profile">
     <img src="assets/img/social-member-vector-icon-person-260nw-1139787308.jpg" style="width:26px;height:25px;" />
   </a>
 </mat-toolbar>
